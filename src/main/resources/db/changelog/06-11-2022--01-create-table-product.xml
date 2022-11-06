@@ -1,0 +1,34 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="create-table-product" author="Yuriy Gorelov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="products"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="products" remarks="Товары">
+            <column name="id" type="UUID" remarks="Идентификатор товара">
+                <constraints primaryKey="true" primaryKeyName="pk_product"/>
+            </column>
+            <column name="name" type="varchar(50)" remarks="Наименование товара">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="varchar(200)" remarks="Описание товара">
+            </column>
+            <column name="price" type="DOUBLE" remarks="Цена">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_available" type="BOOLEAN" remarks="Доступность товара">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantity" type="BIGINT" remarks="Количество дотсупного товара">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,29 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="create-table-ordered-product" author="Yuriy Gorelov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ordered_products"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="ordered_products" remarks="Заказаныне продукты">
+            <column name="order_id" type="uuid" remarks="Идентификатор заказа">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_id" type="uuid" remarks="Идентификатор товара">
+                <constraints nullable="false" foreignKeyName="fk_product_id" references="products(id)"/>
+            </column>
+            <column name="quantity" type="BIGINT" remarks="Количество товара">
+                <constraints nullable="false"/>
+            </column>
+            <column name="process_id" type="uuid" remarks="Идентификатор заказа">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

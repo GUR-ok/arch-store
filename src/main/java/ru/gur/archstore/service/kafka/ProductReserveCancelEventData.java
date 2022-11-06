@@ -7,12 +7,12 @@ import java.util.UUID;
 
 @Value
 @Builder
-public class SomeEventData implements KafkaEvent {
+public class ProductReserveCancelEventData implements KafkaEvent {
 
     UUID orderId;
 
     @Override
     public Event getEvent() {
-        return Event.SOME;
+        return Event.PRODUCT_RESERVE_CANCEL;
     }
 }

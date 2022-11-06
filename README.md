@@ -13,6 +13,10 @@
 
 Для локального поднятия кафки: `docker-compose-kafka up`
 
+Пример сообщения в Кафку:
+
+{"orderId":"1995d700-fd0b-4756-be0b-cdd2bf50cd7e","event":"PRODUCT_RESERVE_CANCEL"}
+
 ---
 ### Очистка пространства:
 
