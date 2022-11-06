@@ -17,8 +17,8 @@ public class Consumer {
 
     private final Set<EventHandler<EventSource>> eventHandlers;
 
-    @KafkaListener(topics = "intercessor", containerFactory = "kafkaListenerContainerFactoryString")
-    public void listenGroupTopic1(String message) throws JsonProcessingException {
+    @KafkaListener(topics = "store", containerFactory = "kafkaListenerContainerFactoryString")
+    public void listenGroupTopic1(String message) {
         log.info("Receive message: {}", message);
 
         final ObjectMapper objectMapper = new ObjectMapper();

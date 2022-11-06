@@ -2,5 +2,5 @@ package ru.gur.archstore.service.kafka;
 
 public enum Event {
 
-    SOME;
+    PRODUCT_RESERVE_CANCEL;
 }

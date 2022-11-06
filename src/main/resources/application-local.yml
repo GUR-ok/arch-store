@@ -14,7 +14,7 @@ management:
 spring:
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: create
     database-platform: org.hibernate.dialect.H2Dialect
     show-sql: true
     properties:
@@ -38,7 +38,7 @@ logging:
   level:
     root: INFO
     org.springframework: INFO
-    ru.gur.arch: DEBUG
+    ru.gur: DEBUG
 
 kafka:
   bootstrapAddress: localhost:9091
