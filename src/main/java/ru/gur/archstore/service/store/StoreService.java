@@ -1,6 +1,7 @@
 package ru.gur.archstore.service.store;
 
 import ru.gur.archstore.service.store.data.OrderedProductData;
+import ru.gur.archstore.service.store.data.ProductData;
 import ru.gur.archstore.service.store.immutable.ImmutableCreateProductRequest;
 import ru.gur.archstore.service.store.immutable.ImmutableReserveProductRequest;
 
@@ -16,4 +17,6 @@ public interface StoreService {
     void cancelReservationByOrderId(UUID orderId);
 
     UUID addProductToStore(ImmutableCreateProductRequest immutableCreateProductRequest);
+
+    List<ProductData> getAllProducts();
 }

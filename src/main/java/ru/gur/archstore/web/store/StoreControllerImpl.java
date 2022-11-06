@@ -10,6 +10,7 @@ import ru.gur.archstore.service.store.immutable.ImmutableCreateProductRequest;
 import ru.gur.archstore.service.store.immutable.ImmutableReserveProductRequest;
 import ru.gur.archstore.web.store.request.CreateProductRequest;
 import ru.gur.archstore.web.store.request.ReserveProductRequest;
+import ru.gur.archstore.web.store.response.GetAllProductsResponse;
 import ru.gur.archstore.web.store.response.GetOrderReserveResponse;
 
 import javax.validation.Valid;
@@ -48,5 +49,13 @@ public class StoreControllerImpl implements StoreController {
         log.debug("CreateProductRequest: " + createProductRequest);
 
         return storeService.addProductToStore(conversionService.convert(createProductRequest, ImmutableCreateProductRequest.class));
+    }
+
+    @Override
+    @GetMapping(path = "/products")
+    public GetAllProductsResponse getAllProducts() {
+        return GetAllProductsResponse.builder()
+                .productDataList(storeService.getAllProducts())
+                .build();
     }
 }

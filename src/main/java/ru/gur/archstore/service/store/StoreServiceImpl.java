@@ -11,6 +11,7 @@ import ru.gur.archstore.entity.Product;
 import ru.gur.archstore.persistance.OrderedProductRepository;
 import ru.gur.archstore.persistance.ProductRepository;
 import ru.gur.archstore.service.store.data.OrderedProductData;
+import ru.gur.archstore.service.store.data.ProductData;
 import ru.gur.archstore.service.store.immutable.ImmutableCreateProductRequest;
 import ru.gur.archstore.service.store.immutable.ImmutableReserveProductRequest;
 
@@ -112,5 +113,19 @@ public class StoreServiceImpl implements StoreService {
         log.debug("Product: " + product);
 
         return productRepository.save(product).getId();
+    }
+
+    @Override
+    public List<ProductData> getAllProducts() {
+        return productRepository.findAll().stream()
+                .map(p -> ProductData.builder()
+                        .id(p.getId())
+                        .name(p.getName())
+                        .description(p.getDescription())
+                        .price(p.getPrice())
+                        .isAvailable(p.getIsAvailable())
+                        .quantity(p.getQuantity())
+                        .build())
+                .collect(Collectors.toList());
     }
 }
