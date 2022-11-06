@@ -12,6 +12,7 @@ import ru.gur.archstore.web.store.request.CreateProductRequest;
 import ru.gur.archstore.web.store.request.ReserveProductRequest;
 import ru.gur.archstore.web.store.response.GetAllProductsResponse;
 import ru.gur.archstore.web.store.response.GetOrderReserveResponse;
+import ru.gur.archstore.web.store.response.ProductReserveResponse;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -28,10 +29,18 @@ public class StoreControllerImpl implements StoreController {
     @Override
     @PostMapping("/products")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public UUID reserveProduct(@Valid @NotNull @RequestBody final ReserveProductRequest reserveProductRequest) {
+    public ProductReserveResponse reserveProduct(@Valid @NotNull @RequestBody final ReserveProductRequest reserveProductRequest) {
         log.debug("ReserveProductRequest: " + reserveProductRequest);
 
-        return storeService.reserveProduct(conversionService.convert(reserveProductRequest, ImmutableReserveProductRequest.class));
+        return conversionService.convert(
+                storeService.reserveProduct(
+                        conversionService.convert(
+                                reserveProductRequest,
+                                ImmutableReserveProductRequest.class
+                        )
+                ),
+                ProductReserveResponse.class
+        );
     }
 
     @Override

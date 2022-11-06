@@ -2,6 +2,7 @@ package ru.gur.archstore.service.store;
 
 import ru.gur.archstore.service.store.data.OrderedProductData;
 import ru.gur.archstore.service.store.data.ProductData;
+import ru.gur.archstore.service.store.data.ProductReserveData;
 import ru.gur.archstore.service.store.immutable.ImmutableCreateProductRequest;
 import ru.gur.archstore.service.store.immutable.ImmutableReserveProductRequest;
 
@@ -10,7 +11,7 @@ import java.util.UUID;
 
 public interface StoreService {
 
-    UUID reserveProduct(ImmutableReserveProductRequest immutableReserveProductRequest);
+    ProductReserveData reserveProduct(ImmutableReserveProductRequest immutableReserveProductRequest);
 
     List<OrderedProductData> getReservedProductByOrderId(UUID orderId);
 

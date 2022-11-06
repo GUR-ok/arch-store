@@ -12,6 +12,7 @@ import ru.gur.archstore.persistance.OrderedProductRepository;
 import ru.gur.archstore.persistance.ProductRepository;
 import ru.gur.archstore.service.store.data.OrderedProductData;
 import ru.gur.archstore.service.store.data.ProductData;
+import ru.gur.archstore.service.store.data.ProductReserveData;
 import ru.gur.archstore.service.store.immutable.ImmutableCreateProductRequest;
 import ru.gur.archstore.service.store.immutable.ImmutableReserveProductRequest;
 
@@ -30,7 +31,7 @@ public class StoreServiceImpl implements StoreService {
 
     @Override
     @Transactional
-    public UUID reserveProduct(final ImmutableReserveProductRequest immutableReserveProductRequest) {
+    public ProductReserveData reserveProduct(final ImmutableReserveProductRequest immutableReserveProductRequest) {
         Assert.notNull(immutableReserveProductRequest, "immutableReserveProductRequest must not be null");
 
         final UUID productId = immutableReserveProductRequest.getProductId();
@@ -60,7 +61,10 @@ public class StoreServiceImpl implements StoreService {
 
         orderedProductRepository.save(orderedProduct);
 
-        return immutableReserveProductRequest.getOrderId();
+        return ProductReserveData.builder()
+                .reserveId(orderedProductId.getOrderId())
+                .amount(orderedProduct.getQuantity() * orderedProduct.getProduct().getPrice())
+                .build();
     }
 
     @Override
